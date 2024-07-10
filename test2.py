@@ -1,32 +1,48 @@
+#Регистрация в клуб любителей Пива
+
 class MyException1(Exception):
-    def __init__(self, message, extra_info):
-        self.message = message
-        self.extra_info = extra_info
+    pass
 
 class MyException2(Exception):
-    def __init__(self, message, extra_info):
-        self.message = message
-        self.extra_info = extra_info
+    pass
 
-def f(a,b):
-    if b == 0:
-        raise MyException1(message='Деление на ноль не возможно', extra_info= {'a': a ,'b': b})
-    return a/b
+class MyException3(Exception):
+    pass
 
-def MyException2(a, b):
+def Веек_club():
+    print('---Регистрация в клуб любителей Пива---')
+    name_ = str(input('Ваше имя?: '))
+    beer_love = str(input('Пиво уважеете?: (Да, нет) '))
     try:
-        a + b
-    except TypeError:
-        return a, b
+        if beer_love == 'нет':
+            raise MyException1("Вам не место в клубе!!!")
+    except MyException1 as exc1:
+        print(f'Ошибка: {exc1}')
+        raise
     else:
-        return a + b
+        print(f'{beer_love} - Пока подходите, но есть еще несколько вопросов')
+
+    beer_age = int(input('Введите возраст: '))
+    try:
+        if beer_age <= 21:
+            raise MyException2("Тебе еще только лимонад можно.")
+    except MyException2 as exc2:
+        print(f'Ошибка: {exc2}')
+        raise
+    else:
+        print("Пока подходишь!")
+
+    beer_valume = int(input('Сколько кружек можешь выпить за один раз?: '))
+    try:
+        if beer_valume < 3:
+            raise MyException3("Ты нам не очень нравишься, нужно пить больше.")
+    except MyException3 as exc3:
+        print(f'Ошибка: {exc3}')
+        raise
+    else:
+        print("Ок, ждем тебя в клубе")
+    finally:
+        print(f'Спасибо, {name_}! Ты ответил на все вопросы!')
 
 
-try:
-    resalt = f(10, 0)
-    print(resalt)
-except MyException1 as e:
-    print("поймали ошибку")
-    print(f'ошибка{e.message}')
-    print(f'Дополнительная инфа {e.extra_info}')
-
+Веек_club()
